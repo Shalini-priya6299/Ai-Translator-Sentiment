@@ -1,3 +1,5 @@
+Here's the link for website: https://ai-translator-sentiment.onrender.com
+
 # Multilingual AI Translator
 This project is a simple and interactive multilingual AI-based translator built using HTML, CSS, and JavaScript. It supports multiple languages, detects sentiment, and translates text in real time. The interface includes emojis, language selection menus, a clean layout, and a smooth user experience. The project is designed to be lightweight, responsive, and easy to use for anyone who wants quick translations or emotional tone detection.
 
