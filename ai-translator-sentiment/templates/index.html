@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multilingual AI Translator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- TOGGLE SWITCH -->
+    <div class="toggle-container">
+        <label class="switch">
+            <input type="checkbox" id="modeToggle">
+            <span class="slider round"></span>
+        </label>
+        <span class="mode-label">Light Mode</span>
+    </div>
+
+    <!-- RISING EMOJI BACKGROUND -->
+    <div id="emoji-rise-container"></div>
+
+    <!-- MAIN CARD -->
+    <div class="card">
+        <h1 class="title">Multilingual AI Translator</h1>
+        <p class="subtitle">Translate any text · Detect language · Analyze sentiment</p>
+
+        <textarea id="inputText" placeholder="Type your text here..."></textarea>
+        <button onclick="analyzeText()">Analyze</button>
+
+        <div id="output"></div>
+    </div>
+
+<!-- CALL BACKEND API -->
+<script>
+function analyzeText() {
+    let text = document.getElementById("inputText").value;
+
+    fetch("/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({ text: text })
+    })
+    .then(res => res.json())
+    .then(data => {
+        let senti = data.sentiment;
+        let pill = senti === "Positive" ? "pos" : senti === "Negative" ? "neg" : "neu";
+
+        // ⭐ FIX ADDED HERE ⭐
+        let sentiEmoji = senti === "Positive" ? "🙂" : senti === "Negative" ? "😞" : "😐";
+
+        document.getElementById("output").innerHTML = `
+        <div class="clean-output-box">
+            <p><span class="o-label">Original Sentence:</span> ${text}</p>
+            <p><span class="o-label">Language Detected:</span> ${data.language}</p>
+            <p><span class="o-label">Translated:</span> ${data.translated}</p>
+
+            <p><span class="o-label">Sentiment Analysis:</span> 
+              <span class="sent-pill ${pill}">
+            ${data.sentiment} 
+    <span class="sent-emoji">${sentiEmoji}</span>
+</span>
+
+            </p>
+        </div>
+        `;
+    });
+}
+</script>
+
+<!-- RISING EMOJI GENERATOR -->
+<script>
+function spawnRisingEmoji() {
+    const emojis = ["😀", "😂", "😊", "😁", "😅", "🤣", "🙂", "🙃", "😉", "😍", "🥰", "😋", "😜", "😝", "🤪", "😎", "🤩", "🥳", "😐", "😑", "😶", "😒", "🙁", "☹️", "😞", "😔", "😟", "😕", "😣", "😖", "😫", "😩", "😭", "😢", "🥺", "😤", "😠", "😡", "🤬", "😨", "😰", "😱", "😳", "🤯", "⭐", "✨", "💫", "🔥", "💥"]
+;
+
+    const emoji = document.createElement("div");
+    emoji.className = "rise-emoji";
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+    emoji.style.left = Math.random() * 90 + "%";
+    emoji.style.top = "100%";
+
+    document.getElementById("emoji-rise-container").appendChild(emoji);
+
+    setTimeout(() => {
+        emoji.remove();
+    }, 5000);
+}
+
+setInterval(spawnRisingEmoji, 500);
+
+// THEME TOGGLE SCRIPT
+document.getElementById("modeToggle").addEventListener("change", function() {
+    document.body.classList.toggle("dark-mode");
+
+    document.querySelector(".mode-label").textContent =
+        document.body.classList.contains("dark-mode") ? "Dark Mode" : "Light Mode";
+});
+</script>
+
+</body>
+</html>
