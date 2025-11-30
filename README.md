@@ -13,5 +13,5 @@ The project contains the main HTML file, CSS styling, JavaScript logic, and mode
 ## Future Improvements
 More languages can be added. The sentiment system can be upgraded. The UI can be expanded with voice input or text-to-speech. The overall speed can be increased with caching and model optimization.
 
-#License
+## License
 This project is open for learning and improvement. You may modify or use it in your own projects.
