@@ -1,0 +1,6 @@
+flask
+langdetect
+deep-translator
+vaderSentiment
+scikit-learn
+numpy
