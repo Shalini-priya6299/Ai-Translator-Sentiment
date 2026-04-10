@@ -44,7 +44,7 @@ function analyzeText() {
         let senti = data.sentiment;
         let pill = senti === "Positive" ? "pos" : senti === "Negative" ? "neg" : "neu";
 
-        // ⭐ FIX ADDED HERE ⭐
+       
         let sentiEmoji = senti === "Positive" ? "🙂" : senti === "Negative" ? "😞" : "😐";
 
         document.getElementById("output").innerHTML = `
