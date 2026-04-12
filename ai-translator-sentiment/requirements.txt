@@ -4,3 +4,4 @@ deep-translator
 vaderSentiment
 scikit-learn
 numpy
+gunicorn
