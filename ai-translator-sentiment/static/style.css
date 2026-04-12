@@ -138,6 +138,7 @@ textarea {
     color: #0F2336;
     background: white;
     transition: background 0.4s, color 0.4s;
+    box-sizing: border-box;
 }
 
 body.dark-mode textarea {
